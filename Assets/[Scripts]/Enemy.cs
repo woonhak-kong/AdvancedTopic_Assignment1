@@ -23,7 +23,6 @@ public class Enemy : MonoBehaviour, IObserver
     {
         if (other.tag == "Projectile")
         {
-            Debug.Log("Trigger!! with" + other.name);
             HP--;
             if (HP <= 0)
             {
