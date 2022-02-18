@@ -44,11 +44,7 @@ public class UIManager : MonoBehaviour, IObserver
 
     public void Restart()
     {
+        //GameManager.Instance.RemoveObserver(this);
         SceneManager.LoadScene("PlayScene1");
-    }
-
-    private void OnDestroy()
-    {
-        GameManager.Instance.RemoveObserver(this);
     }
 }

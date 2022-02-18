@@ -13,27 +13,28 @@ public class Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.Instance.IsPlaying)
+        {
 #if UNITY_EDITOR
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            Debug.Log("LeftMouse");
-            GameManager.Instance.FireProjectile(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-        }
+            if (Input.GetMouseButtonDown(0))
+            {
+                GameManager.Instance.FireProjectile(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            }
 
 #endif
 
 #if UNITY_ANDROID
-        if (Input.touchCount > 0)
-        {
-            Touch touch = Input.GetTouch(0);
-            if (touch.phase == TouchPhase.Began)
+            if (Input.touchCount > 0)
             {
-                GameManager.Instance.FireProjectile(Camera.main.ScreenToWorldPoint(touch.position));
+                Touch touch = Input.GetTouch(0);
+                if (touch.phase == TouchPhase.Began)
+                {
+                    GameManager.Instance.FireProjectile(Camera.main.ScreenToWorldPoint(touch.position));
+                }
             }
-        }
 #endif
-
+        }
 
     }
 }

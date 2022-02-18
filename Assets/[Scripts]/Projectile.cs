@@ -26,13 +26,9 @@ public class Projectile : MonoBehaviour, IObserver
         Destroy(this.gameObject);
     }
 
-    private void OnDestroy()
-    {
-        GameManager.Instance.RemoveObserver(this);
-    }
-
     public void Notify()
     {
+        //GameManager.Instance.RemoveObserver(this);
         Destroy(this.gameObject);
     }
 }

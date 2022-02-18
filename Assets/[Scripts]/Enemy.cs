@@ -27,12 +27,14 @@ public class Enemy : MonoBehaviour, IObserver
             if (HP <= 0)
             {
                 FindObjectOfType<UIManager>().AddScore(10);
+                GameManager.Instance.RemoveObserver(this);
                 Destroy(gameObject);
             }
         }
         else if (other.tag == "Pulverizer")
         {
             //Game Over
+            //GameManager.Instance.RemoveObserver(this);
             GameManager.Instance.GameOver();
             //Destroy(gameObject);
         }
@@ -41,11 +43,7 @@ public class Enemy : MonoBehaviour, IObserver
 
     public void Notify()
     {
+        //GameManager.Instance.RemoveObserver(this);
         Destroy(this.gameObject);
-    }
-
-    private void OnDestroy()
-    {
-        GameManager.Instance.RemoveObserver(this);
     }
 }

@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     public Transform SpawingPositionLeft;
     public Transform SpawingPositionRight;
 
-    private bool _isPlaying;
+    public bool IsPlaying;
 
     private List<IObserver> _observers = new List<IObserver>();
 
@@ -44,13 +44,16 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this);
         }
-        _instance = this;
+        else
+        {
+            _instance = this;
+        }
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        _isPlaying = true;
+        IsPlaying = true;
         StartCoroutine(StartSpaw());
     }
 
@@ -67,7 +70,7 @@ public class GameManager : MonoBehaviour
 
         float previousCoefficient = 0;
 
-        while (_isPlaying)
+        while (IsPlaying)
         {
             // select type of enemy
             typeOfEnemy = Random.Range(0, 3);
@@ -108,6 +111,11 @@ public class GameManager : MonoBehaviour
         _observers.Remove(ob);
     }
 
+    public void RemoveAllObserver()
+    {
+        _observers.Clear();
+    }
+
     private void NotifyObservers()
     {
         foreach (IObserver ob in _observers)
@@ -117,8 +125,9 @@ public class GameManager : MonoBehaviour
     }
     public void GameOver()
     {
-        _isPlaying = false;
+        IsPlaying = false;
         NotifyObservers();
+        RemoveAllObserver();
     }
 
 }
