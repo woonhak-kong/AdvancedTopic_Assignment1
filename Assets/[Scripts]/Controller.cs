@@ -29,7 +29,7 @@ public class Controller : MonoBehaviour
             Touch touch = Input.GetTouch(0);
             if (touch.phase == TouchPhase.Began)
             {
-
+                GameManager.Instance.FireProjectile(Camera.main.ScreenToWorldPoint(touch.position));
             }
         }
 #endif
