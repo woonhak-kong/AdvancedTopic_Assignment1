@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public int HP;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +17,18 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Projectile")
+        {
+            Debug.Log("Trigger!! with" + other.name);
+            HP--;
+            if (HP <= 0)
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 }
