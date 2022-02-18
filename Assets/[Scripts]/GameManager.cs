@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
 
     public List<GameObject> EnemyPrefabs;
+    public GameObject Projectile;
 
     public Transform SpawingPositionLeft;
     public Transform SpawingPositionRight;
@@ -78,5 +79,15 @@ public class GameManager : MonoBehaviour
         }
         yield return null;
     }
+
+
+    public void FireProjectile(Vector3 pos)
+    {
+        GameObject projectile = Instantiate(Projectile);
+        Vector3 projectilePosition = new Vector3(pos.x, -5.5f, 0);
+        projectile.transform.position = projectilePosition;
+
+    }
+
 
 }

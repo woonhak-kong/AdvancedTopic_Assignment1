@@ -7,7 +7,7 @@ public class Projectile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        GetComponent<Rigidbody2D>().velocity = new Vector2(0.0f, 5.0f);
     }
 
     // Update is called once per frame
@@ -16,10 +16,9 @@ public class Projectile : MonoBehaviour
         
     }
 
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Trigger! in projectile");
+        Destroy(this.gameObject);
     }
 
 }

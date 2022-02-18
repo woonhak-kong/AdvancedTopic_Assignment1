@@ -30,5 +30,10 @@ public class Enemy : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+        else if (other.tag == "Pulverizer")
+        {
+            Destroy(gameObject);
+        }
+
     }
 }
