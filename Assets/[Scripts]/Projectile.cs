@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    public GameObject ProjectileExplosion;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,11 +14,12 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        GameObject explosion = Instantiate(ProjectileExplosion);
+        explosion.transform.position = transform.position;
         Destroy(this.gameObject);
     }
 
