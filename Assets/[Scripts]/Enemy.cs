@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IObserver
 {
     public int HP;
 
@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        GameManager.Instance.AddObserver(this);
     }
 
     // Update is called once per frame
@@ -27,13 +27,26 @@ public class Enemy : MonoBehaviour
             HP--;
             if (HP <= 0)
             {
+                FindObjectOfType<UIManager>().AddScore(10);
                 Destroy(gameObject);
             }
         }
         else if (other.tag == "Pulverizer")
         {
-            Destroy(gameObject);
+            //Game Over
+            GameManager.Instance.GameOver();
+            //Destroy(gameObject);
         }
 
+    }
+
+    public void Notify()
+    {
+        Destroy(this.gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.Instance.RemoveObserver(this);
     }
 }

@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
+public interface IObserver
+{
+    void Notify();
+}
+
 public class GameManager : MonoBehaviour
 {
 
@@ -12,6 +19,8 @@ public class GameManager : MonoBehaviour
     public Transform SpawingPositionRight;
 
     private bool _isPlaying;
+
+    private List<IObserver> _observers = new List<IObserver>();
 
 
     // Singleton
@@ -89,5 +98,27 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void AddObserver(IObserver ob)
+    {
+        _observers.Add(ob);
+    }
+
+    public void RemoveObserver(IObserver ob)
+    {
+        _observers.Remove(ob);
+    }
+
+    private void NotifyObservers()
+    {
+        foreach (IObserver ob in _observers)
+        {
+            ob.Notify();
+        }
+    }
+    public void GameOver()
+    {
+        _isPlaying = false;
+        NotifyObservers();
+    }
 
 }
