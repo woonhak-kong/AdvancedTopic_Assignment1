@@ -24,6 +24,12 @@ public class Projectile : MonoBehaviour, IObserver
         explosion.transform.position = transform.position;
         GameManager.Instance.RemoveObserver(this);
         Destroy(this.gameObject);
+
+        if (collision.tag == "Pulverizer")
+        {
+            GameManager.Instance.RemoveObserver(this);
+            Destroy(gameObject);
+        }
     }
 
     public void Notify()
